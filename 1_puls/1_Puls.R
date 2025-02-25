@@ -18,7 +18,7 @@ source("../APECPVutils.R")     #euren Pfad hinzuf?gen, wo ihr "APECPVutils.R" ge
 
 #-------------------------------------------------------
 #read all measurement files
-measurement.files <- list.files(path = "data",pattern = "wav") #data_puls = muss ein Unterordner vom Working directory sein (!), wo eure Messungen gespeichert sind
+measurement.files <- list.files(path = "data_cropped",pattern = "wav") #data_puls = muss ein Unterordner vom Working directory sein (!), wo eure Messungen gespeichert sind
 
 #-------------------------------------------------------
 #Datenauswertung
@@ -29,7 +29,7 @@ te <- NULL        #Vektor definieren, in den die Echolaufzeiten gespeichert werd
 for(n in 1:length(measurement.files)){
 
   
-  FullPath <- paste(getwd(),"data",measurement.files[n], sep="/") #Vollst?ndiger Name zu der n-ten messung im Unterordner "data_puls" des Working directory
+  FullPath <- paste(getwd(),"data_cropped",measurement.files[n], sep="/") #Vollst?ndiger Name zu der n-ten messung im Unterordner "data_puls" des Working directory
   
   data <- read.WAV(FullPath)   #n-te messung auslesen
   
@@ -79,7 +79,7 @@ for(n in 1:length(measurement.files)){
     klick <- locator(1, type="p", cex=0.5)   #find the position where we clicked
     
     #im Bereich +- 0.00065 des geklickten Punkts nach maxima suchen
-    ind <- which(abs(t-klick$x) <0.00065)
+    ind <- which(abs(t-klick$x) <0.000065)
     m <- which.max(s[ind])
     
     #x werte der gefundenen maxima in vektor "pos" speichern
